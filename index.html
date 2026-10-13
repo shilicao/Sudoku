@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang = "en" data-theme = "light">
+<head>
+    <meta charset = "UTF-8">
+    <meta name = "viewport" content = "width =device-width, initial-scale = 1.0">
+    
+    <!-- Iconify icons -->
+    <script src = "https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+
+    <link id = "favicon" rel = "icon" type = "image/png">
+    <script>
+        const canvas = document.createElement("canvas");
+        canvas.width = 65;
+        canvas.height = 65;
+        const context = canvas.getContext("2d");
+
+        // background
+        context.fillStyle="#34334f";
+        context.fillRect(0,0,65,65);
+        context.fillStyle="#ffffff";
+        context.fillRect(9,9,46,46);
+
+        //lines
+        context.strokeStyle="b9b8e8";
+        context.lineWidth = 2;
+        for (const position of [24, 39])
+        {
+            context.beginPath();
+            context.moveTo(position, 9);
+            context.lineTo(position, 55);
+            context.stroke();
+            context.beginPath();
+            context.moveTo(9, position);
+            context.moveTo(55, position);
+            context.stroke();
+        }
+
+        context.fillStyle="#dedcff";
+        context.fillRect(25,25,13,13);
+        context.fillStyle = "#4c47bf";
+        context.font="bold 12px Times New Roman";
+        context.textAlign = "center";
+        context.textBaseline = "middle";
+        context.fillText("3", 35, 35);
+        document.getElementById("favicon").href=canvas.toDataURL("image/png");
+    </script>  
+
+    <link rel = "stylesheet" href = "css/main.css" />
+    <title>Sudoku</title>
+    <link rel = "stylesheet" href = "style.css">
+</head>
+
+<body>
+    <!-- .... -->
+</body>
+</html>
