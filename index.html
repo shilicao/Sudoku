@@ -45,12 +45,74 @@
         document.getElementById("favicon").href=canvas.toDataURL("image/png");
     </script>  
 
-    <link rel = "stylesheet" href = "css/main.css" />
     <title>Sudoku</title>
     <link rel = "stylesheet" href = "style.css">
 </head>
 
 <body>
-    <!-- .... -->
+    <div class="game">
+        <header class = "topbar">
+            <div>
+                <div class = "brand">数独库</div>
+                <div class = "muted">挑战自我</div>
+            </div>
+            <div class = "top-actions">
+                <button
+                    class="theme-toggle"
+                    id="theme-toggle"
+                    type="button"
+                    aria-label="Switch to dark theme"
+                    aria-pressed="false"
+                >
+                    <svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" aria-hidden="true">
+                        <path class="moon-half" d="M12 3a9 9 0 0 0 0 18V3Z" />
+                        <circle class="moon-outline" cx="12" cy="12" r="9" />
+                    </svg>
+                    <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" aria-hidden="true">
+                        <circle cx="12" cy="12" r="4" />
+                        <path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" />
+                    </svg>
+                    <span id="theme-label">Light</span>
+                </button>
+                <button class = "primary" type = "button">New Game</button>
+            </div>
+        </header>
+
+        <div class="workspace">
+            <aside class="sidebar">
+                <p class="section-label">Workspace</p>
+                <button class="side-link active" type="button">▦ &nbsp; Play</button>
+                <button class="side-link" type="button">◷ &nbsp; History</button>
+
+                <p class="section-label difficulty-label">Difficulty</p>
+                <button class="side-link" type="button">Easy</button>
+                <button class="side-link active" type="button">Medium</button>
+                <button class="side-link" type="button">Hard</button>
+            </aside>
+
+            <main class="puzzle-area">
+                <div id="sudoku-board" aria-label="Sudoku board"></div>
+            </main>
+
+            <aside class="game-details">
+                <p class="section-label">Medium · Puzzle 042</p>
+                <h2>Good pace.</h2>
+                <p class="muted">Continue where you left off.</p>
+
+                <div class="tool-buttons">
+                <button class="icon-button" type="button" aria-label="Undo" title="Undo">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 14 4 9l5-5M4 9h10a6 6 0 0 1 6 6v1" /></svg>
+                </button>
+                <button class="icon-button" type="button" aria-label="Redo" title="Redo">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 4 5 5-5 5m5-5H10a6 6 0 0 0-6 6v1" /></svg>
+                </button>
+                </div>
+
+                <p class="keyboard-hint"><kbd>1-9</kbd> enter &nbsp; <kbd>← ↑ ↓ →</kbd> move</p>
+            </aside>
+        </div>
+    </div>
+
+    <script type="module" src="./JS/main.js"></script>
 </body>
 </html>
