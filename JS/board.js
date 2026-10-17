@@ -10,7 +10,7 @@ const startingBoard = [
   [0, 0, 0, 0, 0, 0, 0, 7, 9]
 ];
 
-export function renderBoard(container, puzzle = startingBoard) {
+export function board(container, puzzle = startingBoard) {
   if (!container) {
     throw new Error("Could not find the Sudoku board container.");
   }

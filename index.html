@@ -85,13 +85,16 @@
                 <button class="side-link" type="button">◷ &nbsp; History</button>
 
                 <p class="section-label difficulty-label">Difficulty</p>
-                <button class="side-link" type="button">Easy</button>
-                <button class="side-link active" type="button">Medium</button>
-                <button class="side-link" type="button">Hard</button>
+                <button class="side-link" data-difficulty = "easy" type="button">Easy</button>
+                <button class="side-link" data-difficulty ="medium" type="button">Medium</button>
+                <button class="side-link" data-difficulty = "hard" type="button">Hard</button>
             </aside>
 
             <main class="puzzle-area">
-                <div id="sudoku-board" aria-label="Sudoku board"></div>
+                <p id = "prompt" role = "status">
+                    Choose a diffculty to Start!
+                </p>
+                <div id="sudoku-board" aria-label="Sudoku board" hidden></div>
             </main>
 
             <aside class="game-details">

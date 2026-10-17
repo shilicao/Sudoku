@@ -1,11 +1,12 @@
-import { renderBoard } from "./board.js";
+//function call from other files.
+import { board } from "./board.js";
+import { getPuzzle } from "./generator.js";
+
 
 const root = document.documentElement;
 const themeButton = document.querySelector("#theme-toggle");
 const themeLabel = document.querySelector("#theme-label");
 
-// generate initial board.
-renderBoard(document.querySelector("#sudoku-board"));
 
 //theme toggle funtionality. 
 function applyTheme(theme) {
@@ -37,4 +38,26 @@ themeButton?.addEventListener("click", () => {
     localStorage.setItem("sudoku-theme", nextTheme);
   } catch {
   }
+});
+
+//Difficulty selection
+const newBoard = document.querySelector("#sudoku-board");
+const startPrompt = document.querySelector("#prompt");
+const difficultyButtons = document.querySelectorAll("[data-difficulty]");
+
+difficultyButtons.forEach((button) => 
+{
+  button.addEventListener("click", () => 
+  {
+    const difficulty = button.dataset.difficulty;
+    const puzzle = getPuzzle(difficulty);
+    board(newBoard, puzzle);
+    newBoard.hidden = false; //generate board once the difficulty has been selected. 
+    startPrompt.hidden = true; //hide once board generated.
+
+    difficultyButtons.forEach((difficultyButtons) =>
+    {
+      difficultyButtons.classList.toggle("active", difficulty === button);
+    });
+  });
 });
