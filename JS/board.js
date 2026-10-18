@@ -10,15 +10,19 @@ const startingBoard = [
   [0, 0, 0, 0, 0, 0, 0, 7, 9]
 ];
 
-export function board(container, puzzle = startingBoard) {
-  if (!container) {
+export function board(container, puzzle = startingBoard) 
+{
+  if (!container) 
+  {
     throw new Error("Could not find the Sudoku board container.");
   }
 
   container.replaceChildren();
 
-  puzzle.forEach((row, rowIndex) => {
-    row.forEach((value, colIndex) => {
+  puzzle.forEach((row, rowIndex) => 
+  {
+    row.forEach((value, colIndex) => 
+    {
       const cell = document.createElement("input");
       cell.type = "text";
       cell.inputMode = "numeric";
@@ -32,14 +36,16 @@ export function board(container, puzzle = startingBoard) {
         `Row ${rowIndex + 1}, column ${colIndex + 1}`
       );
 
-      if (value !== 0) {
+      if (value !== 0) 
+      {
         cell.value = value;
         cell.classList.add("given");
         cell.readOnly = true;
         cell.setAttribute("aria-label", `Given ${value}, row ${rowIndex + 1}, column ${colIndex + 1}`);
       }
 
-      cell.addEventListener("input", () => {
+      cell.addEventListener("input", () => 
+      {
         cell.value = cell.value.replace(/[^1-9]/g, "").slice(-1);
       });
 

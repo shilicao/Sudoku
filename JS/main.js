@@ -9,7 +9,8 @@ const themeLabel = document.querySelector("#theme-label");
 
 
 //theme toggle funtionality. 
-function applyTheme(theme) {
+function applyTheme(theme) 
+{
   const isDark = theme === "dark";
   root.dataset.theme = isDark ? "dark" : "light";
 
@@ -57,7 +58,7 @@ difficultyButtons.forEach((button) =>
 
     difficultyButtons.forEach((difficultyButtons) =>
     {
-      difficultyButtons.classList.toggle("active", difficulty === button);
+      difficultyButtons.classList.toggle("active", difficultyButton === button);
     });
   });
 });
