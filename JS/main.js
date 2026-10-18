@@ -58,7 +58,7 @@ difficultyButtons.forEach((button) =>
 
     difficultyButtons.forEach((difficultyButtons) =>
     {
-      difficultyButtons.classList.toggle("active", difficultyButton === button);
+      difficultyButtons.classList.toggle("active", difficultyButtons === button);
     });
   });
 });
