@@ -1,9 +1,11 @@
 //connect function from other files. Can be seen as
 //main file where board,generator,and etc as the header.
 import { board } from "./board.js";
+import { validateEntry } from "./sudoku.js";
 import { getPuzzle } from "./generator.js";
-import { Start, getState, setCells,undo, redo, hints, reveal } from "./game_state.js";
-
+import { Start, getState, setCells,undo, redo, hints, reveal, restore } from "./game_state.js";
+import { timeStart, pause, reset, getTime, restoreTime } from "./timer.js";
+import { progress, loadProgress, clearProgress } from "./storage.js";
 
 const root = document.documentElement;
 const themeButton = document.querySelector("#theme-toggle");
@@ -64,8 +66,12 @@ newBoard.addEventListener("input", (event)=>
   if (!accepted)
   {
     const game = getState();
+    const isDuplicate = num !== 0 && game.board && !validateEntry(game.board, row, col, num);
     cell.value= game.board?.[row][col] || "";
+    cell.classList.toggle("conflict", isDuplicate);
+    return;
   }
+  cell.classList.remove("conflict");
 });
 
 //remembers which cell user select when click on hint
@@ -91,18 +97,23 @@ difficultyButtons.forEach((button) =>
   button.addEventListener("click", () => 
   {
     const difficulty = button.dataset.difficulty;
-    const puzzle = getPuzzle(difficulty);
-    Start(difficulty, puzzle);
-    const game = getState();
-    board(newBoard, game.board, game.puzzle);
-    newBoard.hidden = false; //generate board once the difficulty has been selected. 
-    startPrompt.hidden = true; //hide once board generated.
+    newPuzzle(difficulty);
 
     difficultyButtons.forEach((difficultyButtons) =>
     {
       difficultyButtons.classList.toggle("active", difficultyButtons === button);
     });
   });
+});
+
+//Start a new puzzle using the current difficulty.
+document.querySelector("#new-game")?.addEventListener("click", () => {
+  const difficulty = getState().difficulty;
+
+  if (difficulty) 
+  {
+    newPuzzle(difficulty);
+  }
 });
 
 //refresh the board
@@ -139,12 +150,15 @@ document.querySelector("#hint-button")?.addEventListener("click", () => {
     selectedCell?.column
   );
 
-  if (!result) {
+  if (!result) 
+  {
     window.alert("Start a Game");
     return;
   }
 
-  if (result.revealAnswer) {
+  if (result.revealAnswer) 
+  {
+    pause();
     window.alert("No more hints. Game over!!!");
     reveal();
     refresh();
@@ -158,3 +172,47 @@ document.querySelector("#hint-button")?.addEventListener("click", () => {
   );
   hintedCell?.focus();
 });
+
+//start a new puzzle reset.
+function newPuzzle(difficulty)
+{
+  const puzzle = getPuzzle(difficulty);
+  Start(difficulty, puzzle);
+  
+  const game = getState();
+  board(newBoard, game.board, game.puzzle);
+
+  reset();
+  timeStart();
+  selectedCell = null;
+  newBoard.hidden = false;
+  startPrompt.hidden = true;
+}
+
+//restores board and selected difficulty, meaning people can 
+//comeback to resume where they left off with same difficulty. 
+const savedProgress = loadProgress();
+if (savedProgress && restore(savedProgress.game))
+{
+  const game = getState();
+  board(newBoard, game.board, game.puzzle);
+  newBoard.hidden = false;
+  startPrompt.hidden = true;
+  difficultyButtons.forEach((button)=>
+  {
+    button.classList.toggle("active",button.dataset.difficulty === game.difficulty);
+  });
+  restoreTime(savedProgress.time)
+  if (game.status === "playing")
+  {
+    timeStart();
+  }
+  else 
+  {
+    clearProgress();
+  }
+}
+
+// test the max time allowed after leaves the page. 
+window.addEventListener("pagehide", ()=>{
+pause(); progress(getState(), getTime());});

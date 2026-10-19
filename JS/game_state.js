@@ -1,4 +1,5 @@
 import {solution as solvePuzzle} from "./solver.js";
+import { validateEntry } from "./sudoku.js";
 
 let currentGame = 
 {
@@ -85,6 +86,14 @@ export function setCells(row, col, num)
         return false;
     }
 
+    //check for duplicate entry in board and column. 
+    //will be use in main.js to restrain player enter
+    //duplicate num. If it happens, the cell will mark red
+    //and rejects what player enter. 
+    if (num!== 0 && !validateEntry(currentGame.board, row, col, num))
+    {
+        return false;
+    }
     currentGame.undoStack.push({row, col, before, after:num});
     currentGame.redoStack = [];
     currentGame.board[row][col] = num;
@@ -170,4 +179,23 @@ export function reveal()
     currentGame.board = currentGame.solution.map((row)=>[...row]);
     currentGame.status = "revealed";
     return true;
+}
+
+//restore game play where people left off
+export function restore(snapshot)
+{
+    try 
+    {
+        Start(snapshot.difficulty, snapshot.puzzle);
+        currentGame.board = snapshot.board.map((row)=>
+        [...row]);
+        currentGame.usedHints = snapshot.usedHints;
+        currentGame.undoStack = snapshot.undoStack.map((move)=>({...move}));
+        currentGame.redoStack = snapshot.redoStack.map((moves2)=>({...moves2}));
+        currentGame.status = snapshot.status;
+        return true;
+    }catch 
+    {
+        return false; 
+    }
 }

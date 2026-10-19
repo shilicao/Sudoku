@@ -4,9 +4,9 @@ export function validateEntry(board, rows, cols, entry)
 {
     for (let i = 0; i < 9; i++)
     {
-        if (board[rows][i] === entry)
+        if (i !== cols && board[rows][i] === entry)
             return false;
-        else if (board[i][cols] === entry)
+        if (i !== rows && board[i][cols] === entry)
             return false;
     }
     
@@ -19,7 +19,7 @@ export function validateEntry(board, rows, cols, entry)
     {
         for (let k = initialColValue; k < initialColValue + 3; k++)
         {
-            if (board[j][k] === entry)
+            if ((j !== rows || k !== cols) && board[j][k] === entry)
             {
                 return false;
             }

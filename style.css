@@ -14,6 +14,9 @@
   --accent-soft: #edecff;
   --accent-soft-text: #4c47bf;
   --selected-outline: #aaa7ff;
+  --conflict-bg: #fee2e2;
+  --conflict-text: #b42318;
+  --conflict-outline: #dc2626;
 }
 
 :root[data-theme="dark"] {
@@ -32,6 +35,9 @@
   --accent-soft: #34334f;
   --accent-soft-text: #d5d2ff;
   --selected-outline: #c1beff;
+  --conflict-bg: #542b34;
+  --conflict-text: #ffd9de;
+  --conflict-outline: #ff8290;
 }
 
 * {
@@ -150,8 +156,8 @@ button:focus-visible,
     display: none !important;
 }
 
-html[data-theme="light"] .theme-icon--moon,
-html[data-theme="dark"] .theme-icon--sun {
+html[data-theme="light"] .theme-icon--sun,
+html[data-theme="dark"] .theme-icon--moon {
     display: block;
 }
 
@@ -273,7 +279,13 @@ html[data-theme="dark"] .theme-icon--sun {
   background: var(--accent);
   color: var(--accent-text);
 }
-
+.cell.conflict,
+.cell.conflict:focus {
+  background: var(--conflict-bg);
+  color: var(--conflict-text);
+  outline: 2px solid var(--conflict-outline);
+  outline-offset: -2px;
+}
 .game-details h2 {
   margin: 8px 0;
   font-size: 18px;
