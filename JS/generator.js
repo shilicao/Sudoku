@@ -43,6 +43,9 @@ function finalSudoku()
         throw new Error ("No solution!");
     }
 }
+
+//auto generate board based on selection of difficulty. 
+//As difficulty increase, more number will be remove.
 function removeNumbers(solvedBoard, targetCell)
 {
     const puzzle = solvedBoard.map((row)=>[...row]);
@@ -56,7 +59,8 @@ function removeNumbers(solvedBoard, targetCell)
         [cells[i], cells[randomNum]] = [cells[randomNum], cells[i]];
     }
 
-    //shuffle the cell. 
+    //shuffle the cell, so it doesn't remove same cell
+    //at the same position. 
     let removed = 0;
     for (const {row, col} of cells)
     {
