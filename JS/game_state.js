@@ -120,19 +120,43 @@ export function redo()
 //count the number of hints. Once reaches three, 
 //main.js will trigger proper function to display game over
 //message and reveal full solution. 
-export function hintCounter()
+//Before that, first two hints will display a correct number
+//in a selected cell
+export function hints(row, column)
 {
     if (!currentGame.board || currentGame.status!== "playing")
     {
         return null;
     }
-    if (currentGame.usedHints < 3)
+    //third hint triggers full solved puzzle
+    if (currentGame.usedHints === 2)
     {
         currentGame.usedHints = currentGame.usedHints + 1;
+        return {
+            usedHints:currentGame.usedHints,
+            revealAnswer: true
+            };
     }
-    return {
+    //reveral correct answer in selected cell. 
+    if (
+    !Number.isInteger(row) ||
+    !Number.isInteger(column) ||
+    row < 0 || row > 8 ||
+    column < 0 || column > 8 ||
+    currentGame.puzzle[row][column] !== 0 ||
+    currentGame.board[row][column] !== 0
+  ) {
+    return null;
+  }
+    
+    const ans = currentGame.solution[row][column];
+    currentGame.undoStack.push({row, col:column, before:0, after:ans});
+    currentGame.redoStack = [];
+    currentGame.board[row][column] = ans;
+    currentGame.usedHints = currentGame.usedHints + 1;
+    return{
         usedHints:currentGame.usedHints,
-        revealAnswer: currentGame.usedHints === 3
+        revealAnswer:false
     };
 }
 

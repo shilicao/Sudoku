@@ -10,7 +10,7 @@ const startingBoard = [
   [0, 0, 0, 0, 0, 0, 0, 7, 9]
 ];
 
-export function board(container, puzzle = startingBoard) 
+export function board(container, currentBoard = startingBoard, originalPuzzle = currentBoard) 
 {
   if (!container) 
   {
@@ -19,7 +19,7 @@ export function board(container, puzzle = startingBoard)
 
   container.replaceChildren();
 
-  puzzle.forEach((row, rowIndex) => 
+  currentBoard.forEach((row, rowIndex) => 
   {
     row.forEach((value, colIndex) => 
     {
@@ -39,9 +39,16 @@ export function board(container, puzzle = startingBoard)
       if (value !== 0) 
       {
         cell.value = value;
+      }
+      //means there is a number in that cell,lock it.
+      if (originalPuzzle[rowIndex][colIndex] !== 0)
+      {
         cell.classList.add("given");
         cell.readOnly = true;
-        cell.setAttribute("aria-label", `Given ${value}, row ${rowIndex + 1}, column ${colIndex + 1}`);
+        cell.setAttribute(
+        "aria-label",
+        `Row ${rowIndex + 1}, column ${colIndex + 1}`
+        );
       }
 
       cell.addEventListener("input", () => 
