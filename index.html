@@ -95,27 +95,51 @@
                 <div id="sudoku-board" aria-label="Sudoku board" hidden></div>
             </main>
 
-            <aside class="game-details">
-                <p>
-                    Elapsed: <time id = "timer">00:00</time>
-                </p>
-                <div class="tool-buttons">
-                <button class="icon-button" type="button" aria-label="Undo" title="Undo">
-                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 14 4 9l5-5M4 9h10a6 6 0 0 1 6 6v1" /></svg>
-                </button>
-                <button class="icon-button" type="button" aria-label="Redo" title="Redo">
-                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 4 5 5-5 5m5-5H10a6 6 0 0 0-6 6v1" /></svg>
-                </button>
-                <button class ="icon-button" id = "hint-button" type="button">
-                    Hint
-                </button>
+            <aside class="right hand side">
+                <div class = "game-details">
+                    <div>
+                        <p class = "rhs-heading">GAME TOOLS</p>
+                        <h2>Session</h2>
+                    </div>
+                    <div class = "time">
+                        <span class = "rhs-heading">TIME</span>
+                        <time id = "timer">00:00</time>
+                    </div>
                 </div>
 
-                <p class="keyboard-hint"><kbd>1-9</kbd> enter &nbsp; <kbd>← ↑ ↓ →</kbd> move</p>
+                <button class = "hint-button" id = "hint-button" type=""button>
+                <span>HINT</span>
+                <span aria-hidden = "true"></span>
+                </button>
+
+                <div class = "buttons">
+                    <button class = "button-tools" type ="button" aria-label =
+                    "Undo" title = "Undo">
+                        <svg viewBox = "0 0 24 24" aria-hidden = "true">
+                            <path d = "M9 14 4 915-5M4 9h10a6 6 0 0 1 6 6v1"/>
+                        </svg>
+                        <span>Undo</span>
+                    </button>
+                    <button class = "button-tools" type ="button" aria-label =
+                    "Redo" title = "Redo">
+                        <svg viewBox = "0 0 24 24" aria-hidden = "true">
+                            <path d = "m15 4 5 5-5 5m5-5H10a6 6 0 0 1 6 6v1"/>
+                        </svg>
+                        <span>Redo</span>
+                    </button>
+                </div>
+                <p class = "keyboard shortcut">
+                    <kbd>1-9</kbd>
+                    <span aria-hidden = "true">.</span>
+                    <kbd>← ↑ ↓ →</kbd> move
+                    <span aria-hidden ="true">.</span>
+                    <kbd>Backspace</kbd> clear
+                </p>
             </aside>
         </div>
     </div>
 
     <script type="module" src="./JS/main.js"></script>
 </body>
+
 </html>
