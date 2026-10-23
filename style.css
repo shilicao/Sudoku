@@ -175,7 +175,7 @@ html[data-theme="dark"] .theme-icon--moon {
   fill: none;
   stroke: currentColor;
 }
-
+/* ============================ left panel ===============================*/
 .workspace {
   display: grid;
   grid-template-columns: 220px minmax(0, 1fr) 220px;
@@ -224,7 +224,7 @@ html[data-theme="dark"] .theme-icon--moon {
   justify-content: center;
   min-width: 0;
 }
-
+/* =========================== game board ======================================*/
 #sudoku-board {
   display: grid;
   grid-template-columns: repeat(9, minmax(0, 1fr));
@@ -310,39 +310,95 @@ html[data-theme="dark"] .theme-icon--moon {
   font-size: 18px;
   font-weight: 500;
 }
-
-.icon-button {
-  display: grid;
-  width: 40px;
-  padding: 0 !important;
-  place-items: center;
+/* ============================ right panel of sudoku board ===========================================*/
+.right-panel{
+  display:flex;
+  flex-direction: column;
+  align-self:center;
+  gap:16px;
 }
-
-.icon-button svg {
-  width: 19px;
-  height: 19px;
-  fill: none;
-  stroke: currentColor;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 1.8;
+.game-details{
+  display:flex;
+  justify-content: space-between;
+  align-items:end;
+  gap:12px;
+  padding-bottom:14px;
+  border-bottom: 1px solid var(--line);
 }
-
-.keyboard-hint {
-  margin-top: 8px;
-  color: var(--muted);
+.rhs-heading{
+  margin:0;
+  color:var(--muted);
   font-size: 12px;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
 }
-
-kbd {
-  padding: 2px 5px;
-  border: 1px solid var(--line);
-  border-radius: 5px;
-  background: var(--control-bg);
-  color: var(--text);
+.game-details h2{
+  margin: 6px 0 0;
+  font-size:18px;
 }
+.time{
+  display:flex;
+  flex-direction: column;
+  align-items:flex-end;
+  gap:4px;
+}
+#timer{
+  font-size:22px;
+  font-weight:800;
+}
+.hint-button{
+  display:flex;
+  justify-content:flex-start;
+  text-align:left;
+  gap:12px;
+  align-items:center;
+  width:100%;
+  min-height:45px;
+  padding:10px 14px;
+  border:0;
+  border-radius:9px;
+  background:var(--accent);
+  color:var(--accent-text);
+  font:inherit;
+  font-weight: 600;
+  cursor:pointer;
+  transition: filter 160ms ease, transform 160 ms ease;
+}
+.hint-button:hover{
+  filter:brightness(1.10);
+  transform:translateY(-1px);
+}
+.hint-button:active{
+  transform:translateY(0)
+}
+.hint-icon{
+  display:grid;
+  flex:0 0 36px;
+  width:36px;
+  height:36px;
+  place-items:center;
+  border-radius:8px;
+  background:rgb(255 255 255 / 18%);
+  font-size:20px;
+}
+.hint{
+  display:flex;
+  flex-direction: row;
+  align-items:flex-start;
+  gap:3px;
+  margin-left:15%;
+  font-weight:800px;
+  font-size:large;
 
-/* repsonive layout for tablet */
+}
+.hint small{
+  display:flex;
+  gap:5px;
+  margin-left:45%;
+  font-size:large;;
+  
+}
+/* =============================== repsonive layout for tablet ================================= */
 @media (max-width: 900px) {
   body {
     padding: 24px 16px;
@@ -385,7 +441,7 @@ kbd {
   }
 }
 
-/* responive layout for phones */
+/* ====================================== responive layout for phones ==================================*/
 @media (max-width: 520px) {
   body {
     padding: 12px;

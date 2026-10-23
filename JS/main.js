@@ -152,10 +152,12 @@ document.querySelector("#hint-button")?.addEventListener("click", () => {
 
   if (!result) 
   {
-    window.alert("Start a Game");
+    window.alert("Select a difficulty to the game.");
     return;
   }
 
+  //keep track of hints used
+  document.querySelector("#hints-remaining").textContent = 3 - result.usedHints;
   if (result.revealAnswer) 
   {
     pause();
@@ -180,6 +182,7 @@ function newPuzzle(difficulty)
   Start(difficulty, puzzle);
   
   const game = getState();
+  document.querySelector("#hints-remaining").textContent = 3 -game.usedHints;
   board(newBoard, game.board, game.puzzle);
 
   reset();
@@ -195,6 +198,7 @@ const savedProgress = loadProgress();
 if (savedProgress && restore(savedProgress.game))
 {
   const game = getState();
+  document.querySelector("#hints-remaining").textContent = 3 - game.usedHints;
   board(newBoard, game.board, game.puzzle);
   newBoard.hidden = false;
   startPrompt.hidden = true;

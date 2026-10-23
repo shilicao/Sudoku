@@ -138,7 +138,7 @@ export function hints(row, column)
         return null;
     }
     //third hint triggers full solved puzzle
-    if (currentGame.usedHints === 2)
+    if (currentGame.usedHints === 3)
     {
         currentGame.usedHints = currentGame.usedHints + 1;
         return {

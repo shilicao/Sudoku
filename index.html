@@ -95,7 +95,7 @@
                 <div id="sudoku-board" aria-label="Sudoku board" hidden></div>
             </main>
 
-            <aside class="right hand side">
+            <aside class="right-panel">
                 <div class = "game-details">
                     <div>
                         <p class = "rhs-heading">GAME TOOLS</p>
@@ -107,12 +107,15 @@
                     </div>
                 </div>
 
-                <button class = "hint-button" id = "hint-button" type=""button>
-                <span>HINT</span>
-                <span aria-hidden = "true"></span>
+                <button class = "hint-button" id = "hint-button" type="button">
+                    <span class = "hint-icon" aria-hidden ="true">✦</span>
+                    <span class = "hint">
+                        <strong>HINT</strong>
+                        <small><span id = "hints-remaining">3</span></small>
+                    </span>
                 </button>
 
-                <div class = "buttons">
+                <div class = "tool-buttons">
                     <button class = "button-tools" type ="button" aria-label =
                     "Undo" title = "Undo">
                         <svg viewBox = "0 0 24 24" aria-hidden = "true">
@@ -128,7 +131,7 @@
                         <span>Redo</span>
                     </button>
                 </div>
-                <p class = "keyboard shortcut">
+                <p class = "keyboard-shortcut">
                     <kbd>1-9</kbd>
                     <span aria-hidden = "true">.</span>
                     <kbd>← ↑ ↓ →</kbd> move
