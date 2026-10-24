@@ -328,7 +328,7 @@ html[data-theme="dark"] .theme-icon--moon {
 .rhs-heading{
   margin:0;
   color:var(--muted);
-  font-size: 12px;
+  font-size: 30px;
   letter-spacing: 0.1rem;
   text-transform: uppercase;
 }
@@ -338,13 +338,14 @@ html[data-theme="dark"] .theme-icon--moon {
 }
 .time{
   display:flex;
-  flex-direction: column;
-  align-items:flex-end;
-  gap:4px;
+  flex-direction: row;
+  align-items:baseline;
+  white-space: nowrap;
 }
 #timer{
   font-size:22px;
-  font-weight:800;
+  font-weight:300;
+  margin-left: 100px;
 }
 .hint-button{
   display:flex;
@@ -398,6 +399,64 @@ html[data-theme="dark"] .theme-icon--moon {
   font-size:large;;
   
 }
+.tool-buttons{
+  display:grid;
+  grid-template-columns: repeat(2,minmax(0, 1fr));
+  gap: 8px;
+}
+.button-tools{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  gap:8px;
+  min-height:50px;
+  padding:10px;
+  border:1px solid var(--line);
+  border-radius: 9px;
+  background: var(--control-bg);
+  color:var(--text);
+  font:inherit;
+  transition: background-color 160ms ease, border-color 160ms ease;
+}
+.button-tools:hover{
+  border-color:var(--accent);
+  background:var(--accent-soft);
+}
+.button-tools svg{
+  width: 16px;
+  height:16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.0;
+  stroke-linecap: round;
+  stroke-linejoin:round;
+}
+.keyboard-shortcut{
+  display:grid;
+  gap:8px;
+  margin:4px 0 0;
+  color:var(--muted);
+  font-size:16px;
+  font-weight: 300;
+  border-top:1px solid var(--line);
+  padding-top:12px
+}
+.shortcuts{
+  display:grid;
+  grid-template-columns: 60px minmax(0, 1fr);
+  align-items:center;
+  column-gap:12%;
+}
+kbd{
+  padding:3px 6px;
+  border:1px solid var(--line);
+  background:var(--control-bg);
+  color:var(--text);
+  font: inherit;
+  font-size:11px;
+  white-space: nowrap;
+}
+
 /* =============================== repsonive layout for tablet ================================= */
 @media (max-width: 900px) {
   body {
@@ -473,6 +532,86 @@ html[data-theme="dark"] .theme-icon--moon {
   }
 }
 
+/* ==========================pop-up message effect ========================*/
+/* completion message */
+.completion-dialog{
+  width:min(90vw, 400px);
+  margin:auto;
+  padding:28px;
+  border:1px solid var(--line);
+  border-radius:20px;
+  background:var(--surface);
+  color:var(--text);
+  text-align:center;
+  box-shadow: 0 24px 70px rgb(20 21 28 / 24%);
+}
+.completion-dialog::backdrop{
+  background: rgb(20 21 28 / 55%);
+  backdrop-filter:blur(2px);
+}
+.completion-dialog[open]{
+  animation: completion-pop 240ms ease-out;
+}
+@keyframes completion-pop{
+  from{
+    opacity:0;
+    transform:translateY(8px) scale(1)
+  }
+  to{
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+.completion.mark {
+  display: grid;
+  width: 52px;
+  height: 52px;
+  margin: 0 auto 14px;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  color: var(--accent-soft-text);
+  font-size: 25px;
+}
+
+.completion-title {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+#completion-msg {
+  margin: 7px 0 20px;
+  font-size: 25px;
+}
+
+.completion-time {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 18px;
+  padding: 12px;
+  border-radius: 8px;
+  background: var(--control-bg);
+}
+
+#NEW_GAME {
+  width: 100%;
+  min-height: 44px;
+  border: 0;
+  border-radius: 9px;
+  background: var(--accent);
+  color: var(--accent-text);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .completion-dialog[open] {
+    animation: none;
+  }
+}
+
+/* ================================================== */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

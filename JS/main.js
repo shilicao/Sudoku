@@ -10,7 +10,8 @@ import { progress, loadProgress, clearProgress } from "./storage.js";
 const root = document.documentElement;
 const themeButton = document.querySelector("#theme-toggle");
 const themeLabel = document.querySelector("#theme-label");
-
+const completionDialog = document.querySelector("#completion");
+const completionTimeDisplay = document.querySelector("#completion-time");
 
 //theme toggle funtionality. 
 function applyTheme(theme) 
@@ -72,6 +73,16 @@ newBoard.addEventListener("input", (event)=>
     return;
   }
   cell.classList.remove("conflict");
+  const game = getState();
+
+  //used to show completion pop-up message 
+  if (game.status === "completed") 
+  {
+    pause();
+    completionTimeDisplay.textContent =
+      document.querySelector("#timer").textContent;
+    completionDialog.showModal();
+  }
 });
 
 //remembers which cell user select when click on hint
@@ -90,6 +101,38 @@ newBoard.addEventListener("focusin",(event)=>
   };
 });
 
+//wire arrows on the keyboard to move between cells.
+//it also strict to move outside of the board.
+newBoard.addEventListener("keydown", (event) => {
+  const cell = event.target;
+  if (!cell.matches(".cell")) return;
+
+  const row = Number(cell.dataset.row);
+  const col = Number(cell.dataset.col);
+
+  const moves = {
+    ArrowUp: [-1, 0],
+    ArrowDown: [1, 0],
+    ArrowLeft: [0, -1],
+    ArrowRight: [0, 1]
+  };
+
+  const move = moves[event.key];
+  if (!move) return;
+
+  event.preventDefault();
+
+  const nextRow = row + move[0];
+  const nextCol = col + move[1];
+
+  if (nextRow < 0 || nextRow > 8 || nextCol < 0 || nextCol > 8) return;
+
+  newBoard
+    .querySelector(`[data-row="${nextRow}"][data-col="${nextCol}"]`)
+    ?.focus();
+});
+
+//records the selected difficulty level
 const startPrompt = document.querySelector("#prompt");
 const difficultyButtons = document.querySelectorAll("[data-difficulty]");
 difficultyButtons.forEach((button) => 
@@ -116,6 +159,17 @@ document.querySelector("#new-game")?.addEventListener("click", () => {
   }
 });
 
+//new game click button for pop-up message window.
+document.querySelector("#NEW_GAME")?.addEventListener("click", () => {
+  const difficulty = getState().difficulty;
+
+  completionDialog.close();
+
+  if (difficulty)
+  {
+    newPuzzle(difficulty);
+  }
+});
 //refresh the board
 export function refresh()
 {

@@ -97,16 +97,11 @@
 
             <aside class="right-panel">
                 <div class = "game-details">
-                    <div>
-                        <p class = "rhs-heading">GAME TOOLS</p>
-                        <h2>Session</h2>
-                    </div>
                     <div class = "time">
                         <span class = "rhs-heading">TIME</span>
                         <time id = "timer">00:00</time>
                     </div>
                 </div>
-
                 <button class = "hint-button" id = "hint-button" type="button">
                     <span class = "hint-icon" aria-hidden ="true">✦</span>
                     <span class = "hint">
@@ -119,29 +114,42 @@
                     <button class = "button-tools" type ="button" aria-label =
                     "Undo" title = "Undo">
                         <svg viewBox = "0 0 24 24" aria-hidden = "true">
-                            <path d = "M9 14 4 915-5M4 9h10a6 6 0 0 1 6 6v1"/>
+                            <path d = "M9 14 4 9l5-5M4 9h10a6 6 0 0 1 6 6v1"/>
                         </svg>
                         <span>Undo</span>
                     </button>
                     <button class = "button-tools" type ="button" aria-label =
                     "Redo" title = "Redo">
                         <svg viewBox = "0 0 24 24" aria-hidden = "true">
-                            <path d = "m15 4 5 5-5 5m5-5H10a6 6 0 0 1 6 6v1"/>
-                        </svg>
+                            <path d = "M15 4l5 5-5 5M20 9H10a6 6 0 0 0-6 6v1"/>                        </svg>
                         <span>Redo</span>
                     </button>
                 </div>
                 <p class = "keyboard-shortcut">
-                    <kbd>1-9</kbd>
-                    <span aria-hidden = "true">.</span>
-                    <kbd>← ↑ ↓ →</kbd> move
-                    <span aria-hidden ="true">.</span>
-                    <kbd>Backspace</kbd> clear
+                    <span class = "shortcuts">
+                        <kbd>1-9</kbd>To Enter a number
+                    </span>
+                    <span class = "shortcuts">
+                        <kbd>← ↑ ↓ →</kbd> Move between cells
+                    </span>
+                    <span class = "shortcuts">
+                        <kbd>Backspace</kbd>Clear a cell
+                    </span>
                 </p>
             </aside>
         </div>
     </div>
+    <dialog id = "completion" class ="completion-dialog" aria-labelledy = "completion-msg">
+        <div class ="completion mark" aria-hidden ="true">✓</div>
+        <p class = completion-title>Puzzle Complete</p>
+        <h2 id = "completion-msg">Congratulations!</h2>
 
+        <div class = "completion-time">
+            <span>Time</span>
+            <time id = "completion-time">00:00</time>
+        </div>
+        <button id = "NEW_GAME" class = "primary" type = "button">New Game</button>
+    </dialog>
     <script type="module" src="./JS/main.js"></script>
 </body>
 

@@ -41,7 +41,7 @@ export function Start(difficulty,puzzle)
 export function getState()
 {
     //puzzle = current board, board = player's board 
-    //solution is completed board. 
+    //solution is the completed board. 
     return{
         //puzzle, board, and solution will each return a 
         //copy of one board if no error. 
@@ -86,10 +86,10 @@ export function setCells(row, col, num)
         return false;
     }
 
-    //check for duplicate entry in board and column. 
+    //check for duplicate entry in row and column. 
     //will be use in main.js to restrain player enter
     //duplicate num. If it happens, the cell will mark red
-    //and rejects what player enter. 
+    //and rejects whatever player enter. 
     if (num!== 0 && !validateEntry(currentGame.board, row, col, num))
     {
         return false;
@@ -97,6 +97,17 @@ export function setCells(row, col, num)
     currentGame.undoStack.push({row, col, before, after:num});
     currentGame.redoStack = [];
     currentGame.board[row][col] = num;
+
+    const boardIsSolved = currentGame.board.every((boardRow, rowIndex) =>
+  boardRow.every(
+    (value, colIndex) => value === currentGame.solution[rowIndex][colIndex]
+    )
+    );
+
+    if (boardIsSolved) 
+    {
+        currentGame.status = "completed";
+    }
     return true;
 }
 
@@ -138,9 +149,8 @@ export function hints(row, column)
         return null;
     }
     //third hint triggers full solved puzzle
-    if (currentGame.usedHints === 3)
+    if (currentGame.usedHints >= 3)
     {
-        currentGame.usedHints = currentGame.usedHints + 1;
         return {
             usedHints:currentGame.usedHints,
             revealAnswer: true

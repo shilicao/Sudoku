@@ -1,16 +1,5 @@
 //recrusive backtracking algorithm to find the solution. 
 import { validateEntry } from "./sudoku.js";
-export function solution(puzzle)
-{
-    const board = puzzle.map((row)=> [...row]);
-    const isGood = RecrusiveBacktracking(board);
-    if (isGood)
-    {
-        return board;
-    }
-    else 
-        return false;
-}
 function RecrusiveBacktracking(board)
 {
     //find the first cell. 
@@ -40,6 +29,18 @@ function RecrusiveBacktracking(board)
         }
     }
     return true; //solution has been found fo all cells. 
+}
+
+export function solution(puzzle)
+{
+    const board = puzzle.map((row)=> [...row]);
+    const isGood = RecrusiveBacktracking(board);
+    if (isGood)
+    {
+        return board;
+    }
+    else 
+        return false;
 }
 
 // check to make sure sudoku has only one solution,because a proper 
