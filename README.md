@@ -15,6 +15,7 @@ level to start, track their time, and use built-in tools to help complete each p
 - New Game: Start a new puzzle whenever player is ready. 
 
 **Getting Started**
+
 NO build tools or package installation are required. 
 
 1. Clone the repo:
