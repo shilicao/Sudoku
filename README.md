@@ -18,12 +18,12 @@ level to start, track their time, and use built-in tools to help complete each p
 NO build tools or package installation are required. 
 
 1. Clone the repo:
-   
+   ```
    git clone https://github.com/shilicao/Sudoku.git
-    
+    ```
 2. Open the folder:
-
+   ```
    cd Sudoku
-    
+    ```
 3. Open index.html in local browser or use VS Code with Live Server extension. 
     
